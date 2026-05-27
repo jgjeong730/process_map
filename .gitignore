@@ -1,0 +1,4 @@
+node_modules
+dist
+verify_*.mjs
+verify_*.png
