@@ -45,6 +45,10 @@ export const stages = [
       { name: '경쟁사 분석 시트', desc: '강약점 비교표' },
       { name: 'MVP 정의서', desc: '필수 기능 범위 확정' },
     ],
+    images: [
+      { id: 'img-p1', caption: '경쟁 앱 분석 비교표 (스프레드시트 예시)', src: null },
+      { id: 'img-p2', caption: 'MVP 기능 3가지를 정리한 기획서 예시', src: null },
+    ],
   },
   {
     id: 2,
@@ -91,6 +95,10 @@ export const stages = [
       { name: '화면 설계서', desc: '페이지 목록 + 와이어프레임' },
       { name: '기술 스택 결정서', desc: '선택 이유 포함' },
       { name: 'DB 스키마', desc: '테이블/컬렉션 구조' },
+    ],
+    images: [
+      { id: 'img-d1', caption: '손으로 그린 와이어프레임 예시', src: null },
+      { id: 'img-d2', caption: 'DB 테이블 구조 다이어그램 예시', src: null },
     ],
   },
   {
@@ -144,6 +152,10 @@ export const stages = [
       { name: '폴더 구조 가이드', desc: '표준 디렉토리 구조' },
       { name: '.env 템플릿', desc: '환경변수 목록' },
     ],
+    images: [
+      { id: 'img-s1', caption: '폴더 구조 생성 후 VS Code 모습', src: null },
+      { id: 'img-s2', caption: 'package.json 의존성 설치 완료 터미널', src: null },
+    ],
   },
   {
     id: 4,
@@ -195,6 +207,10 @@ export const stages = [
     templates: [
       { name: '컴포넌트 설계서', desc: '재사용 컴포넌트 목록' },
       { name: 'API 명세서', desc: '요청/응답 형식' },
+    ],
+    images: [
+      { id: 'img-dev1', caption: 'Claude Code 터미널 세션 화면', src: null },
+      { id: 'img-dev2', caption: '컴포넌트 트리 완성 후 브라우저 화면', src: null },
     ],
   },
   {
@@ -248,6 +264,10 @@ export const stages = [
       { name: 'QA 체크리스트', desc: '기능별 테스트 시나리오' },
       { name: '버그 리포트 양식', desc: '이슈 추적 템플릿' },
     ],
+    images: [
+      { id: 'img-t1', caption: 'Lighthouse 성능 측정 결과 화면', src: null },
+      { id: 'img-t2', caption: '크롬 DevTools 모바일 반응형 확인 화면', src: null },
+    ],
   },
   {
     id: 6,
@@ -299,6 +319,10 @@ export const stages = [
     templates: [
       { name: '배포 체크리스트', desc: '론칭 전 최종 확인' },
       { name: '운영 가이드', desc: '장애 대응 프로세스' },
+    ],
+    images: [
+      { id: 'img-dep1', caption: 'GitHub Pages 배포 완료 화면', src: null },
+      { id: 'img-dep2', caption: 'Vercel 자동 배포 파이프라인 대시보드', src: null },
     ],
   },
 ]
