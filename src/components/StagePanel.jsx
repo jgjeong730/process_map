@@ -1,3 +1,118 @@
+import { useState } from 'react'
+
+function ChecklistItem({ item, checked, stageColor, lightColor, borderColor, onToggle }) {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <div
+      style={{
+        borderRadius: '10px',
+        border: `1px solid ${checked ? borderColor : open ? borderColor : '#E2E8F0'}`,
+        background: checked ? lightColor : open ? lightColor + '60' : '#F8FAFC',
+        overflow: 'hidden',
+        transition: 'border-color 0.15s ease, background 0.15s ease',
+      }}
+    >
+      {/* Row */}
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '10px',
+          padding: '10px 12px',
+          cursor: 'pointer',
+          userSelect: 'none',
+        }}
+        onClick={() => setOpen(o => !o)}
+      >
+        {/* Checkbox — stop propagation so click doesn't also toggle accordion */}
+        <input
+          type="checkbox"
+          checked={checked}
+          onChange={() => onToggle(item.id)}
+          onClick={e => e.stopPropagation()}
+          style={{
+            width: '16px',
+            height: '16px',
+            accentColor: stageColor,
+            flexShrink: 0,
+            cursor: 'pointer',
+          }}
+        />
+
+        <span
+          style={{
+            flex: 1,
+            fontSize: '13px',
+            color: checked ? '#64748B' : '#374151',
+            textDecoration: checked ? 'line-through' : 'none',
+            fontWeight: checked ? '400' : '500',
+          }}
+        >
+          {item.text}
+        </span>
+
+        {/* Expand chevron */}
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 14 14"
+          fill="none"
+          style={{
+            flexShrink: 0,
+            color: open ? stageColor : '#94A3B8',
+            transform: open ? 'rotate(180deg)' : 'rotate(0deg)',
+            transition: 'transform 0.2s ease, color 0.15s ease',
+          }}
+        >
+          <path
+            d="M2.5 5L7 9.5L11.5 5"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </div>
+
+      {/* Expanded detail */}
+      {open && (
+        <div
+          style={{
+            padding: '0 12px 12px 38px',
+            borderTop: `1px solid ${borderColor}`,
+            paddingTop: '10px',
+          }}
+        >
+          <p
+            style={{
+              fontSize: '12px',
+              color: '#475569',
+              lineHeight: '1.6',
+              marginBottom: '6px',
+            }}
+          >
+            {item.detail}
+          </p>
+          <p
+            style={{
+              fontSize: '12px',
+              color: stageColor,
+              fontWeight: '600',
+              lineHeight: '1.5',
+              background: lightColor,
+              borderRadius: '6px',
+              padding: '6px 10px',
+            }}
+          >
+            {item.example}
+          </p>
+        </div>
+      )}
+    </div>
+  )
+}
+
 export default function StagePanel({ stage, checks, onToggle }) {
   if (!stage) {
     return (
@@ -67,12 +182,7 @@ export default function StagePanel({ stage, checks, onToggle }) {
             </h2>
             <p style={{ fontSize: '13px', color: '#64748B' }}>{stage.description}</p>
           </div>
-          <div
-            style={{
-              marginLeft: 'auto',
-              textAlign: 'right',
-            }}
-          >
+          <div style={{ marginLeft: 'auto', textAlign: 'right' }}>
             <div style={{ fontSize: '24px', fontWeight: '800', color: stage.color }}>
               {pct}%
             </div>
@@ -95,53 +205,25 @@ export default function StagePanel({ stage, checks, onToggle }) {
 
       <div style={{ padding: '20px 24px', display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
         {/* Checklist */}
-        <div style={{ flex: '1', minWidth: '220px' }}>
+        <div style={{ flex: '1', minWidth: '260px' }}>
           <h3 style={{ fontSize: '14px', fontWeight: '700', color: '#374151', marginBottom: '12px' }}>
             ✅ 체크리스트
+            <span style={{ fontSize: '11px', fontWeight: '400', color: '#94A3B8', marginLeft: '8px' }}>
+              항목을 클릭하면 설명을 볼 수 있어요
+            </span>
           </h3>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            {stage.checklist.map(item => {
-              const checked = !!checks[item.id]
-              return (
-                <label
-                  key={item.id}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    gap: '10px',
-                    padding: '10px 12px',
-                    borderRadius: '10px',
-                    background: checked ? stage.lightColor : '#F8FAFC',
-                    border: `1px solid ${checked ? stage.borderColor : '#E2E8F0'}`,
-                    cursor: 'pointer',
-                    transition: 'all 0.15s ease',
-                  }}
-                >
-                  <input
-                    type="checkbox"
-                    checked={checked}
-                    onChange={() => onToggle(item.id)}
-                    style={{
-                      width: '16px',
-                      height: '16px',
-                      accentColor: stage.color,
-                      flexShrink: 0,
-                      marginTop: '2px',
-                    }}
-                  />
-                  <span
-                    style={{
-                      fontSize: '13px',
-                      color: checked ? '#64748B' : '#374151',
-                      textDecoration: checked ? 'line-through' : 'none',
-                      fontWeight: checked ? '400' : '500',
-                    }}
-                  >
-                    {item.text}
-                  </span>
-                </label>
-              )
-            })}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+            {stage.checklist.map(item => (
+              <ChecklistItem
+                key={item.id}
+                item={item}
+                checked={!!checks[item.id]}
+                stageColor={stage.color}
+                lightColor={stage.lightColor}
+                borderColor={stage.borderColor}
+                onToggle={onToggle}
+              />
+            ))}
           </div>
         </div>
 
