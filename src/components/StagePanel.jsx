@@ -113,6 +113,8 @@ function ChecklistItem({ item, checked, stageColor, lightColor, borderColor, onT
   )
 }
 
+const BASE = import.meta.env.BASE_URL
+
 export default function StagePanel({ stage, checks, onToggle }) {
   if (!stage) {
     return (
@@ -287,7 +289,7 @@ export default function StagePanel({ stage, checks, onToggle }) {
               >
                 {img.src ? (
                   <img
-                    src={img.src}
+                    src={BASE + img.src}
                     alt={img.caption}
                     style={{ width: '100%', display: 'block', borderRadius: '8px 8px 0 0' }}
                   />
