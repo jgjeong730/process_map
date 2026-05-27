@@ -113,8 +113,6 @@ function ChecklistItem({ item, checked, stageColor, lightColor, borderColor, onT
   )
 }
 
-const BASE = import.meta.env.BASE_URL
-
 export default function StagePanel({ stage, checks, onToggle }) {
   if (!stage) {
     return (
@@ -257,84 +255,6 @@ export default function StagePanel({ stage, checks, onToggle }) {
         </div>
       </div>
 
-      {/* Example Images */}
-      {stage.images?.length > 0 && (
-        <div
-          style={{
-            padding: '0 24px 24px',
-            borderTop: `1px solid ${stage.borderColor}`,
-            marginTop: '-4px',
-            paddingTop: '20px',
-          }}
-        >
-          <h3 style={{ fontSize: '14px', fontWeight: '700', color: '#374151', marginBottom: '12px' }}>
-            🖼️ 실제 예시 이미지
-            <span style={{ fontSize: '11px', fontWeight: '400', color: '#94A3B8', marginLeft: '8px' }}>
-              실제 스크린샷으로 교체 예정
-            </span>
-          </h3>
-          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-            {stage.images.map(img => (
-              <div
-                key={img.id}
-                style={{
-                  flex: '1',
-                  minWidth: '200px',
-                  maxWidth: '360px',
-                  borderRadius: '10px',
-                  overflow: 'hidden',
-                  border: '1.5px dashed #CBD5E1',
-                  background: '#F8FAFC',
-                }}
-              >
-                {img.src ? (
-                  <img
-                    src={BASE + img.src}
-                    alt={img.caption}
-                    style={{ width: '100%', display: 'block', borderRadius: '8px 8px 0 0' }}
-                  />
-                ) : (
-                  <div
-                    style={{
-                      height: '140px',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '8px',
-                      background: 'repeating-linear-gradient(45deg, #F1F5F9, #F1F5F9 4px, #F8FAFC 4px, #F8FAFC 14px)',
-                    }}
-                  >
-                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                      <rect x="2" y="7" width="28" height="20" rx="3" stroke="#CBD5E1" strokeWidth="2"/>
-                      <circle cx="16" cy="17" r="5" stroke="#CBD5E1" strokeWidth="2"/>
-                      <path d="M11 7l2-3h6l2 3" stroke="#CBD5E1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      <circle cx="25" cy="11" r="1.5" fill="#CBD5E1"/>
-                    </svg>
-                    <span style={{ fontSize: '11px', color: '#94A3B8', fontWeight: '500' }}>
-                      스크린샷 준비 중
-                    </span>
-                  </div>
-                )}
-                <div
-                  style={{
-                    padding: '8px 12px',
-                    borderTop: '1px dashed #E2E8F0',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                  }}
-                >
-                  <span style={{ fontSize: '10px', color: '#94A3B8' }}>📌</span>
-                  <span style={{ fontSize: '12px', color: '#475569', fontWeight: '500' }}>
-                    {img.caption}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
     </div>
   )
 }

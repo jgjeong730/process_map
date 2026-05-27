@@ -15,7 +15,7 @@ export default function ProcessMap({ stages, activeId, checks, onSelect }) {
         border: '1px solid #E2E8F0',
       }}
     >
-      <div style={{ marginBottom: '20px' }}>
+      <div style={{ marginBottom: '16px' }}>
         <h2 style={{ fontSize: '16px', fontWeight: '700', color: '#1E293B', marginBottom: '4px' }}>
           전체 프로세스
         </h2>
@@ -24,23 +24,14 @@ export default function ProcessMap({ stages, activeId, checks, onSelect }) {
         </p>
       </div>
 
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0',
-          overflowX: 'auto',
-          paddingBottom: '8px',
-        }}
-      >
-        {stages.map((stage, i) => (
+      <div className="stage-grid">
+        {stages.map(stage => (
           <StageCard
             key={stage.id}
             stage={stage}
             isActive={activeId === stage.id}
             progress={getProgress(stage)}
             onClick={() => onSelect(stage.id)}
-            isLast={i === stages.length - 1}
           />
         ))}
       </div>

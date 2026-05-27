@@ -47,3 +47,17 @@ input[type="checkbox"] {
   background: #CBD5E1;
   border-radius: 3px;
 }
+
+/* Process map card grid */
+.stage-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 6px;
+}
+
+@media (max-width: 640px) {
+  .stage-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+}
